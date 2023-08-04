@@ -16,6 +16,17 @@ const App = () => {
     )  
   }, [])
 
+  // checks if user details of logged-in user are already found in local storage
+  // then if so, details are saved in app
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      blogService.setToken(user.token)
+    }
+  }, [])
+
   // login handler
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -23,6 +34,11 @@ const App = () => {
       const user = await loginService.login({
         username, password
       })
+
+      // save token to browser's local storage
+      window.localStorage.setItem(
+        'loggedUser', JSON.stringify(user)
+      )
 
       blogService.setToken(user.token)
       setUser(user)
@@ -36,6 +52,18 @@ const App = () => {
     }
 
     console.log('logging in with', username, password)
+  }
+
+  const handleLogout = (event) => {
+    event.preventDefault()
+    try {
+      window.localStorage.removeItem('loggedUser')
+      blogService.setToken(user.token)
+      setUser(null)
+      console.log('Logging out');
+    } catch (exception) {
+      console.log('Error logging out');
+    }
   }
 
   const loginForm = () => (
@@ -80,6 +108,7 @@ const App = () => {
       {!user && loginForm()}
       {user && <div>
           <p>{user.name} logged in</p>
+          <button onClick={handleLogout}>Log out</button>
         </div>
       }
 
