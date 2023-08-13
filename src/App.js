@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Blog from './components/Blog'
+import Notification from './components/Notification'
 import blogService from './services/blogs'
 import loginService from './services/login'
 
@@ -113,6 +114,10 @@ const App = () => {
       .then(returnedBlog => {
         setBlogs(blogs.concat(returnedBlog))
         setNewBlog({ url: '', title: '', author: '' })
+        setErrorMessage(`a new blog ${newBlog.title} was created`)
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
       })
   }
 
@@ -130,16 +135,18 @@ const App = () => {
 
   const blogForm = () => (
     <div>
+      <h3>Create new blog</h3>
+    
       <form onSubmit={handleCreate}>
         <label>Url:</label>
         <input type='text' value={newBlog.url} onChange={handleUrlChange}></input>
-
+        <br/>
         <label>Title:</label>
         <input type='text' value={newBlog.title} onChange={handleTitleChange}></input>
-
+        <br/>
         <label>Author:</label>
         <input type='text' value={newBlog.author} onChange={handleAuthorChange}></input>
-
+        <br/>
         <button type='submit'>Add blog</button>
       </form>
     </div>
@@ -148,6 +155,7 @@ const App = () => {
   return (
     <div>
       <h1>Blogs list</h1>
+      <Notification message={errorMessage} />
 
       {!user && loginForm()}
       {user && <div>
