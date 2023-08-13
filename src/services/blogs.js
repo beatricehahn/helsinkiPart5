@@ -4,7 +4,7 @@ const baseUrl = '/api/blogs'
 // private token variable
 let TOKEN = null
 
-// chages token value with auth header
+// changes token value with auth header
 const setToken = newToken => {
   TOKEN = `Bearer ${newToken}`
 }
@@ -15,7 +15,6 @@ const getAll = () => {
 }
 
 const create = async newObject => {
-  // 
   const config = {
     headers: { Authorization: TOKEN }
   }

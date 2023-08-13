@@ -53,6 +53,8 @@ const App = () => {
       )
 
       blogService.setToken(user.token)
+      console.log('token is ', user.token);
+
       setUser(user)
       setUsername('')
       setPassword('')
@@ -103,30 +105,15 @@ const App = () => {
     </form>
   )
 
-  const handleCreate = async (event) => {
+  const handleCreate =  (event) => {
     event.preventDefault()
-    try {
-      const loggedUserJSON = window.localStorage.getItem('loggedUser')
-      const token = loggedUserJSON.token
 
-      blogService.setToken(token)
-
-      blogService.create(newBlog)
-
-      // reset blog
-      setNewBlog({
-        url: '',
-        title: '',
-        author: ''
+    blogService
+      .create(newBlog)
+      .then(returnedBlog => {
+        setBlogs(blogs.concat(returnedBlog))
+        setNewBlog({ url: '', title: '', author: '' })
       })
-    } catch (exception) {
-        setErrorMessage('Error creating a new blog post')
-        setTimeout(() => {
-          setErrorMessage(null)
-        }, 5000)
-    }
-
-    console.log('submitted a new blog')
   }
 
   const handleUrlChange = (event) => {
@@ -170,7 +157,6 @@ const App = () => {
         </div>
       }
   
-
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}
