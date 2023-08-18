@@ -132,7 +132,7 @@ const App = () => {
           <p>{user.name} logged in</p>
           <button onClick={handleLogout}>Log out</button>
 
-          <Toggler buttonLabel='add new blog'>
+          <Toggler primaryLabel='add new blog' secondaryLabel='cancel'>
             <BlogForm
               newBlog={newBlog}
               handleCreate={handleCreate}
@@ -141,7 +141,7 @@ const App = () => {
               handleAuthorChange={handleAuthorChange}
             />
           </Toggler>
-          
+
           {blogs.map(blog =>
             <Blog key={blog.id} blog={blog} />
           )}
