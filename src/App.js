@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react'
+
 import Blog from './components/Blog'
 import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
 import BlogForm from './components/BlogForm'
+import Toggler from './components/Toggler'
+
 import blogService from './services/blogs'
 import loginService from './services/login'
 
@@ -23,7 +26,6 @@ const App = () => {
     title: '',
     author: ''
   })
-
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -110,30 +112,10 @@ const App = () => {
     setNewBlog({ ...newBlog, author: event.target.value })
   }
 
-  // const blogForm = () => (
-  //   <div>
-  //     <h3>Create new blog</h3>
-    
-  //     <form onSubmit={handleCreate}>
-  //       <label>Url:</label>
-  //       <input type='text' value={newBlog.url} onChange={handleUrlChange}></input>
-  //       <br/>
-  //       <label>Title:</label>
-  //       <input type='text' value={newBlog.title} onChange={handleTitleChange}></input>
-  //       <br/>
-  //       <label>Author:</label>
-  //       <input type='text' value={newBlog.author} onChange={handleAuthorChange}></input>
-  //       <br/>
-  //       <button type='submit'>Add blog</button>
-  //     </form>
-  //   </div>
-  // )
-
   return (
     <div>
       <h1>Blogs list</h1>
       <Notification message={errorMessage} />
-
 
       {!user && 
         <LoginForm 
@@ -149,13 +131,17 @@ const App = () => {
         <div>
           <p>{user.name} logged in</p>
           <button onClick={handleLogout}>Log out</button>
-          <BlogForm
-            newBlog={newBlog}
-            handleCreate={handleCreate}
-            handleUrlChange={handleUrlChange}
-            handleTitleChange={handleTitleChange}
-            handleAuthorChange={handleAuthorChange}
-          />
+
+          <Toggler buttonLabel='add new blog'>
+            <BlogForm
+              newBlog={newBlog}
+              handleCreate={handleCreate}
+              handleUrlChange={handleUrlChange}
+              handleTitleChange={handleTitleChange}
+              handleAuthorChange={handleAuthorChange}
+            />
+          </Toggler>
+          
           {blogs.map(blog =>
             <Blog key={blog.id} blog={blog} />
           )}
