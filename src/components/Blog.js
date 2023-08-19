@@ -11,6 +11,7 @@ const Blog = ( {blog} ) => (
           <br/>
           likes: {blog.likes} <button>like</button>
           <br/>
+          Added by: {blog.user.name}
         </div>
       </Toggler>
     </div>

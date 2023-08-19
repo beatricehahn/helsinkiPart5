@@ -1,0 +1,11 @@
+.blogWrapper {
+    padding-top: 10px;
+    padding-left: 2px;
+    border: 2px solid #c0e2e7;
+    margin-bottom: 5px;
+    border-radius: 10px;
+}
+
+.innerWrapper {
+    display: inline-block;
+}
