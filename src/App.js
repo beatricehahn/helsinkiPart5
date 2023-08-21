@@ -29,9 +29,13 @@ const App = () => {
   })
 
   useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs(blogs)
-    )  
+    blogService
+      .getAll()
+      .then(response => {
+        const sortedByLikes = response.sort((a, b) => b.likes - a.likes)
+        setBlogs(sortedByLikes)
+      })
+      .catch (error => console.log('Error fetching blogs from database', error.message))  
   }, [])
 
   // checks if user details of logged-in user are already found in local storage
