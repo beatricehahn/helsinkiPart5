@@ -20,6 +20,11 @@ const Blog = ( {blog} ) => {
       })
   }
 
+  const removeBlog = () => {
+    blogService
+      .remove(blog.id)
+  }
+
   return (
     <div className='blogWrapper'>
       <div className='innerWrapper'>
@@ -32,6 +37,7 @@ const Blog = ( {blog} ) => {
             <br/>
             Added by: {blog.user.name}
           </div>
+          <button onClick={removeBlog}>Remove post</button>
         </Toggler>
       </div>
     </div>  
