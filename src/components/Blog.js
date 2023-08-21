@@ -2,7 +2,7 @@ import blogService from "../services/blogs.services"
 
 import Toggler from "./Toggler"
 
-import './styles/Blog.styles.css'
+//import './styles/Blog.styles.css'
 
 
 const Blog = ( {blog} ) => {
