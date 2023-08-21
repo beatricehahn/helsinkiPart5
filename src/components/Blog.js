@@ -30,7 +30,7 @@ const Blog = ( {blog} ) => {
       <div className='innerWrapper'>
         <b>{blog.title}</b> by <i>{blog.author}</i>
         <Toggler primaryLabel='view' secondaryLabel='hide'>
-          <div>
+          <div className='hiddenByDefault'>
             {blog.url}
             <br/>
             likes: {blog.likes} <button onClick={addLike}>like</button>

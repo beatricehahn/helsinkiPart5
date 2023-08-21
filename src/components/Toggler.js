@@ -14,9 +14,9 @@ const Toggler = (props) => {
     return (
         <div>
             <div style={hideWhenVisible}>
-                <button onClick={toggleVisibility}>{props.primaryLabel}</button>
+                <button onClick={toggleVisibility} className='primaryButton'>{props.primaryLabel}</button>
             </div>
-            <div style={showWhenVisible}>
+            <div style={showWhenVisible} className='togglableContent'>
                 <button onClick={toggleVisibility}>{props.secondaryLabel}</button>
                 {props.children}
             </div>
