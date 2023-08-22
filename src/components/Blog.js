@@ -1,17 +1,18 @@
-import blogService from "../services/blogs.services"
+import blogService from '../services/blogs.services'
 
-import Toggler from "./Toggler"
+import Toggler from './Toggler'
 
-//import './styles/Blog.styles.css'
+import './styles/Blog.styles.css'
 
 
-const Blog = ( {blog} ) => {
+const Blog = ( { blog } ) => {
   const addLike = () => {
-    const toUpdate = { 
-      url: blog.url, 
+    const toUpdate = {
+      url: blog.url,
       title: blog.title,
-      author: blog.author, 
-      likes: blog.likes + 1}
+      author: blog.author,
+      likes: blog.likes + 1
+    }
 
     blogService
       .update(blog.id, toUpdate)
@@ -40,7 +41,7 @@ const Blog = ( {blog} ) => {
           <button onClick={removeBlog}>Remove post</button>
         </Toggler>
       </div>
-    </div>  
+    </div>
   )
 }
 
