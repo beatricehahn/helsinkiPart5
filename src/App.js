@@ -34,8 +34,7 @@ const App = () => {
       .then(response => {
         const sortedByLikes = response.sort((a, b) => b.likes - a.likes)
         setBlogs(sortedByLikes)
-      })
-      .catch (error => console.log('Error fetching blogs from database', error.message))  
+      }).catch(error => console.log('Error fetching blogs from database', error.message))
   }, [])
 
   // checks if user details of logged-in user are already found in local storage
@@ -63,7 +62,7 @@ const App = () => {
       )
 
       blogService.setToken(user.token)
-      console.log('token is ', user.token);
+      console.log('token is ', user.token)
 
       setUser(user)
       setUsername('')
@@ -84,9 +83,9 @@ const App = () => {
       window.localStorage.removeItem('loggedUser')
       blogService.setToken(user.token)
       setUser(null)
-      console.log('Logging out');
+      console.log('Logging out')
     } catch (exception) {
-      console.log('Error logging out');
+      console.log('Error logging out')
     }
   }
 
@@ -106,7 +105,7 @@ const App = () => {
   }
 
   const handleUrlChange = (event) => {
-    setNewBlog({ ...newBlog, url: event.target.value})
+    setNewBlog({ ...newBlog, url: event.target.value })
   }
 
   const handleTitleChange = (event) => {
@@ -122,17 +121,17 @@ const App = () => {
       <h1>Blogs list</h1>
       <Notification message={errorMessage} />
 
-      {!user && 
-        <LoginForm 
+      {!user &&
+        <LoginForm
           handleLogin={handleLogin}
-          username={username} 
-          password={password} 
-          handleUsernameChange={({target}) => setUsername(target.value)}
-          handlePasswordChange={({target}) => setPassword(target.value)}
+          username={username}
+          password={password}
+          handleUsernameChange={ ({ target }) => setUsername(target.value) }
+          handlePasswordChange={ ({ target }) => setPassword(target.value) }
         />
       }
 
-      {user && 
+      {user &&
         <div>
           <p>{user.name} logged in</p>
           <button onClick={handleLogout}>Log out</button>
@@ -152,7 +151,6 @@ const App = () => {
           )}
         </div>
       }
-  
     </div>
   )
 }
